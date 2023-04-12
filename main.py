@@ -19,23 +19,36 @@ def printPoly(polygon):
     print('1', *polygon[1])
     print('2', *polygon[2])
 
-
+def check_input(a):
+    if len(a) != 2:
+        print('Нужно ввести 2 координаты')
+        return 0
+    c1, c2 = map(int, a)
+    if 0 > c1 or c1 > 2 or 0 > c2 or c2 > 2:
+        print('Введите координаты от 0 до 2')
+        return 0
+    else:
+        return 1
 def turn(polygon, step):
     while True:
         if step == 0:
-            c1, c2 = map(int, input('Ход 1-ого игрока: Введите коордитнаты клетки куда поставить крестик').split())
-            if polygon[c1][c2] == '-':
-                polygon[c1][c2] = 'x'
-                yield polygon
-            else:
-                print('Эта клетка уже занята, введите другую')
+            a=input('Ход 1-ого игрока: Введите коордитнаты клетки куда поставить крестик').split()
+            if check_input(a):
+                c1, c2 = map(int, a)
+                if polygon[c1][c2] == '-':
+                    polygon[c1][c2] = 'x'
+                    yield polygon
+                else:
+                    print('Эта клетка уже занята, введите другую')
         else:
-            c1, c2 = map(int, input('Ход 2-ого игрока: Введите коордитнаты клетки куда поставить нолик').split())
-            if polygon[c1][c2] == '-':
-                polygon[c1][c2] = 'o'
-                yield polygon
-            else:
-                print('Эта клетка уже занята, введите другую')
+            a = input('Ход 2-ого игрока: Введите коордитнаты клетки куда поставить нолик').split()
+            if check_input(a):
+                c1, c2 = map(int, a)
+                if polygon[c1][c2] == '-':
+                    polygon[c1][c2] = 'o'
+                    yield polygon
+                else:
+                    print('Эта клетка уже занята, введите другую')
 
 
 print('Правила игры:\n1)Игроки ходят по очереди. Первый ход делает игрок, который играет крестиками.\n2)Для хода введите 2 координаты(0,1,2) через пробел(первая координата, это номер строки, вторая номер столбца.\nУдачной игры.')
